@@ -30,7 +30,7 @@
       - **Value:** It stores the integer type time value.
       - **Unit:**  It is in seconds.
       
-- **How to use:**
+### How to use:
 
 > java -jar PAT-Editor.jar
 
