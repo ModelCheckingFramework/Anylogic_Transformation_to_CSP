@@ -1,0 +1,21 @@
+
+// Variables
+var x=0;
+var y=0;
+var a=1;
+var b=3;
+
+// Processes
+PlayerA = SendAPlayerA();
+PlayerB = WaitBPlayerB();
+
+// Process Defination
+channel Pong 0;
+channel Ping 0;
+SendAPlayerA() = [1 > 0]  (atomic{Ping!0-> Wait[1]; WaitAPlayerA()});
+WaitAPlayerA() = (atomic{Pong?0-> Wait[1]; SendAPlayerA()});
+WaitBPlayerB() = (atomic{Ping?0->{a=a+1}-> Wait[1]; SendBPlayerB()});
+SendBPlayerB() = [b > a]  (atomic{Pong!0-> Wait[1]; WaitBPlayerB()});
+
+// System Defination
+System = PlayerA || PlayerB || 
